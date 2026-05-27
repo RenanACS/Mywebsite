@@ -1,0 +1,26 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"></head>
+<body><div class="card">
+  <div class="eyebrow" style="margin-bottom:14px;">motion · ease curves</div>
+  <style>
+    .curve { display:flex; flex-direction:column; gap:6px; align-items:flex-start; }
+    .curve svg { width:120px; height:60px; background:#121215; border:1px solid var(--rs-line); border-radius:8px; padding:0; }
+    .dot { width:8px; height:8px; border-radius:50%; background:#FFB800; }
+  </style>
+  <div style="display:flex;gap:14px;">
+    <div class="curve">
+      <svg viewBox="0 0 120 60"><path d="M8 52 C 33 52, 60 8, 112 8" stroke="#FFB800" stroke-width="1.5" fill="none"/></svg>
+      <span class="label">ease-out · default · 200ms</span>
+      <span class="mono" style="font-size:10px;color:var(--rs-fg-2);">.22, 1, .36, 1</span>
+    </div>
+    <div class="curve">
+      <svg viewBox="0 0 120 60"><path d="M8 52 C 60 52, 60 8, 112 8" stroke="#FFB800" stroke-width="1.5" fill="none"/></svg>
+      <span class="label">ease-in-out · 320ms</span>
+      <span class="mono" style="font-size:10px;color:var(--rs-fg-2);">.65, 0, .35, 1</span>
+    </div>
+    <div class="curve">
+      <svg viewBox="0 0 120 60"><path d="M8 52 C 26 52, 36 -8, 70 4 S 110 8, 112 8" stroke="#FFB800" stroke-width="1.5" fill="none"/></svg>
+      <span class="label">spring · magnetic · 560ms</span>
+      <span class="mono" style="font-size:10px;color:var(--rs-fg-2);">.34, 1.56, .64, 1</span>
+    </div>
+  </div>
+</div></body></html>

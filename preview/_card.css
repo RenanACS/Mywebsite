@@ -1,0 +1,46 @@
+/* Shared styles for Design System tab preview cards.
+   Each card targets ~700px wide. Keep them visual; the asset name renders
+   outside the card by the host. */
+@import url('../colors_and_type.css');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--rs-black);
+  color: var(--rs-fg-1);
+  font-family: var(--rs-font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+.card {
+  width: 700px;
+  padding: 24px;
+  box-sizing: border-box;
+  background: var(--rs-black);
+}
+.row { display: flex; gap: 12px; align-items: stretch; }
+.col { display: flex; flex-direction: column; gap: 12px; }
+.grid { display: grid; gap: 12px; }
+.mono { font-family: var(--rs-font-mono); }
+.eyebrow {
+  font-family: var(--rs-font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rs-fg-3);
+}
+.label { font-family: var(--rs-font-mono); font-size: 10px; color: var(--rs-fg-3); letter-spacing: 0.02em; }
+.swatch {
+  flex: 1;
+  height: 84px;
+  border-radius: 10px;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid var(--rs-line);
+  position: relative;
+  overflow: hidden;
+}
+.swatch .name { font-family: var(--rs-font-mono); font-size: 11px; color: var(--rs-fg-1); }
+.swatch .hex { font-family: var(--rs-font-mono); font-size: 10px; color: var(--rs-fg-3); }

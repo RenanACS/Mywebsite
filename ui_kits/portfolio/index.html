@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Renan Soares — Portfolio</title>
+
+  <link rel="icon" type="image/svg+xml" href="../../assets/logo.svg" />
+  <link rel="stylesheet" href="../../colors_and_type.css" />
+
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #000; color: #fff;
+      font-family: var(--rs-font-sans); -webkit-font-smoothing: antialiased;
+      cursor: none; /* hide system cursor; restored on inputs */ }
+    @media (pointer: coarse), (max-width: 1023px) { html, body { cursor: auto; } }
+    input, textarea, select { cursor: auto; }
+
+    /* tab title bar tweak */
+    ::selection { background: #FFB800; color: #000; }
+
+    /* link reset */
+    a { color: inherit; }
+
+    /* small pulse anim used in hero status dot */
+    @keyframes rsPulse {
+      0%   { transform: scale(0.9); opacity: 0.5; }
+      70%  { transform: scale(2.2); opacity: 0; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+
+    /* scrollbar */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #000; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.32); }
+
+    #root { position: relative; min-height: 100vh; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- React + Babel (pinned) -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <!-- Components: order matters. Primitives, then composites, then sections, then root. -->
+  <script type="text/babel" src="MagneticHover.jsx"></script>
+  <script type="text/babel" src="Cursor.jsx"></script>
+  <script type="text/babel" src="components.jsx"></script>
+  <script type="text/babel" src="Nav.jsx"></script>
+  <script type="text/babel" src="Hero.jsx"></script>
+  <script type="text/babel" src="About.jsx"></script>
+  <script type="text/babel" src="Projects.jsx"></script>
+  <script type="text/babel" src="Skills.jsx"></script>
+  <script type="text/babel" src="Contact.jsx"></script>
+
+  <script type="text/babel">
+    const { useEffect, useState } = React;
+
+    function App() {
+      const [active, setActive] = useState('about');
+
+      // Track which section is in view for nav highlight.
+      useEffect(() => {
+        const ids = ['about', 'projects', 'skills', 'contact'];
+        const els = ids.map(id => document.getElementById(id)).filter(Boolean);
+        const io = new IntersectionObserver((entries) => {
+          // Take the topmost visible section.
+          const visible = entries
+            .filter(e => e.isIntersecting)
+            .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+          if (visible[0]) setActive(visible[0].target.id);
+        }, { rootMargin: '-40% 0px -50% 0px' });
+        els.forEach(el => io.observe(el));
+        return () => io.disconnect();
+      }, []);
+
+      // Console easter egg — emoji ARE allowed here, just not on the page.
+      useEffect(() => {
+        const style1 = 'font-family: ui-monospace, monospace; font-size: 12px; color: #FFB800;';
+        const style2 = 'font-family: ui-monospace, monospace; font-size: 11px; color: rgba(255,255,255,0.5);';
+        // eslint-disable-next-line no-console
+        console.log('%c$ whoami\n%cRenan Soares  ·  software eng → red team  ·  drummer 🥁  ·  cats🐈 + dog🐕  ·  github.com/RenanACS', style1, style2);
+      }, []);
+
+      return (
+        <>
+          <Cursor />
+          <Nav active={active} />
+          <Hero />
+          <About />
+          <Projects />
+          <Skills />
+          <Contact />
+        </>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>

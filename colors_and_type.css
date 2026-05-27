@@ -1,0 +1,220 @@
+/* ============================================================
+   Renan Soares — Portfolio Design System
+   Tokens + semantic styles
+   ============================================================ */
+
+/* Fonts — Geist (Uber Move substitute) + JetBrains Mono */
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* ---------- COLOR — Neutrals (the base of the system) ---------- */
+  --rs-black:        #000000;        /* canvas */
+  --rs-ink:          #0A0A0C;        /* surface tier 1 */
+  --rs-surface:      #121215;        /* surface tier 2 (cards) */
+  --rs-elevated:     #1A1A1F;        /* hover / popovers */
+  --rs-line:         rgba(255, 255, 255, 0.08);  /* hairline borders */
+  --rs-line-strong:  rgba(255, 255, 255, 0.16);  /* hairlines on hover */
+  --rs-line-bright:  rgba(255, 255, 255, 0.24);
+
+  /* ---------- COLOR — Foreground ---------- */
+  --rs-fg:           #FFFFFF;
+  --rs-fg-1:         rgba(255, 255, 255, 0.92);  /* primary text */
+  --rs-fg-2:         rgba(255, 255, 255, 0.64);  /* secondary text */
+  --rs-fg-3:         rgba(255, 255, 255, 0.40);  /* tertiary / labels */
+  --rs-fg-4:         rgba(255, 255, 255, 0.24);  /* disabled / dividers */
+
+  /* ---------- COLOR — Accent (single sharp accent — amber phosphor) ---------- */
+  --rs-accent:       #FFB800;        /* solid amber — fills only (CTAs, active dot) */
+  --rs-accent-hi:    #FFCC33;        /* hover lighten / accent text */
+  --rs-accent-lo:    #E0A000;        /* press darken */
+  --rs-accent-soft:  rgba(255, 184, 0, 0.16);    /* tint backgrounds */
+  --rs-accent-line:  rgba(255, 184, 0, 0.36);
+
+  /* ---------- COLOR — Hover (neon-white affordance, not a chromatic) ----------
+     Cards / surfaces / links use neon-white on hover. Amber is reserved for
+     the *action* (filled buttons, status). This separates affordance from action. */
+  --rs-hover-border: rgba(255, 255, 255, 0.5);
+  --rs-hover-glow:   0 0 0 1px rgba(255, 255, 255, 0.5),
+                     0 0 32px -4px rgba(255, 255, 255, 0.18),
+                     inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+  /* ---------- COLOR — Signal (use sparingly, red-team flavor) ---------- */
+  --rs-live:         #2BD37B;        /* "active", "online" */
+  --rs-warn:         #FF8A3D;        /* "advisory" (shifted orange so it doesn't clash with amber accent) */
+  --rs-crit:         #FF4D4D;        /* "critical" / cves */
+
+  /* ---------- TYPE — Families ---------- */
+  --rs-font-sans:    'Geist', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --rs-font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* ---------- TYPE — Scale ---------- */
+  --rs-text-2xs:   10px;
+  --rs-text-xs:    12px;
+  --rs-text-sm:    13px;
+  --rs-text-base:  15px;
+  --rs-text-md:    17px;
+  --rs-text-lg:    20px;
+  --rs-text-xl:    24px;
+  --rs-text-2xl:   32px;
+  --rs-text-3xl:   44px;
+  --rs-text-4xl:   60px;
+  --rs-text-5xl:   84px;
+  --rs-text-6xl:  120px;
+
+  /* ---------- TYPE — Weights ---------- */
+  --rs-weight-regular:  400;
+  --rs-weight-medium:   500;
+  --rs-weight-semibold: 600;
+  --rs-weight-bold:     700;
+
+  /* ---------- TYPE — Tracking ---------- */
+  --rs-track-tight:    -0.02em;
+  --rs-track-tighter:  -0.035em;
+  --rs-track-normal:    0;
+  --rs-track-mono:      0.02em;
+  --rs-track-caps:      0.14em;
+
+  /* ---------- SPACING (4px grid, Base-style) ---------- */
+  --rs-space-0:   0px;
+  --rs-space-1:   4px;
+  --rs-space-2:   8px;
+  --rs-space-3:  12px;
+  --rs-space-4:  16px;
+  --rs-space-5:  24px;
+  --rs-space-6:  32px;
+  --rs-space-7:  48px;
+  --rs-space-8:  64px;
+  --rs-space-9:  96px;
+  --rs-space-10: 128px;
+
+  /* ---------- RADII (tight; disciplined) ---------- */
+  --rs-radius-0:   0px;
+  --rs-radius-xs:  4px;
+  --rs-radius-sm:  6px;
+  --rs-radius-md:  10px;
+  --rs-radius-lg:  14px;
+  --rs-radius-pill: 999px;
+
+  /* ---------- SHADOWS / ELEVATION ----------
+     We avoid drop-shadows on black; use 1px borders + a subtle inner highlight.
+     A faint accent glow is reserved for active / hovered focal points. */
+  --rs-elev-0:  none;
+  --rs-elev-1:  inset 0 1px 0 rgba(255,255,255,0.04);
+  --rs-elev-2:  inset 0 1px 0 rgba(255,255,255,0.06), 0 1px 0 rgba(0,0,0,0.4);
+  --rs-glow:    0 0 0 1px var(--rs-accent-line), 0 8px 40px -8px rgba(255, 184, 0, 0.45);
+
+  /* ---------- MOTION ---------- */
+  --rs-ease-out:    cubic-bezier(0.22, 1, 0.36, 1);     /* default */
+  --rs-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --rs-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);  /* magnetic / overshoot */
+  --rs-dur-1: 120ms;
+  --rs-dur-2: 200ms;
+  --rs-dur-3: 320ms;
+  --rs-dur-4: 560ms;
+}
+
+/* ============================================================
+   Semantic styles — apply these as class names
+   ============================================================ */
+
+.rs-body {
+  background: var(--rs-black);
+  color: var(--rs-fg-1);
+  font-family: var(--rs-font-sans);
+  font-size: var(--rs-text-base);
+  line-height: 1.55;
+  letter-spacing: var(--rs-track-tight);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display / hero — the loudest type */
+.rs-display {
+  font-family: var(--rs-font-sans);
+  font-weight: var(--rs-weight-semibold);
+  font-size: clamp(48px, 8vw, var(--rs-text-6xl));
+  line-height: 0.96;
+  letter-spacing: var(--rs-track-tighter);
+}
+
+/* Headings */
+.rs-h1 {
+  font-family: var(--rs-font-sans);
+  font-weight: var(--rs-weight-semibold);
+  font-size: var(--rs-text-4xl);
+  line-height: 1.04;
+  letter-spacing: var(--rs-track-tighter);
+}
+.rs-h2 {
+  font-family: var(--rs-font-sans);
+  font-weight: var(--rs-weight-semibold);
+  font-size: var(--rs-text-2xl);
+  line-height: 1.12;
+  letter-spacing: var(--rs-track-tight);
+}
+.rs-h3 {
+  font-family: var(--rs-font-sans);
+  font-weight: var(--rs-weight-medium);
+  font-size: var(--rs-text-lg);
+  line-height: 1.3;
+  letter-spacing: var(--rs-track-tight);
+}
+
+/* Body */
+.rs-p {
+  font-family: var(--rs-font-sans);
+  font-weight: var(--rs-weight-regular);
+  font-size: var(--rs-text-base);
+  line-height: 1.6;
+  color: var(--rs-fg-2);
+  text-wrap: pretty;
+}
+.rs-p-lg {
+  font-size: var(--rs-text-md);
+  line-height: 1.55;
+}
+
+/* Caption / fine print */
+.rs-caption {
+  font-family: var(--rs-font-mono);
+  font-weight: var(--rs-weight-regular);
+  font-size: var(--rs-text-xs);
+  letter-spacing: var(--rs-track-mono);
+  color: var(--rs-fg-3);
+}
+
+/* Eyebrow / category label — always mono, ALL CAPS */
+.rs-eyebrow {
+  font-family: var(--rs-font-mono);
+  font-weight: var(--rs-weight-medium);
+  font-size: var(--rs-text-2xs);
+  letter-spacing: var(--rs-track-caps);
+  text-transform: uppercase;
+  color: var(--rs-fg-3);
+}
+
+/* Code / inline mono — for paths, commands, CVEs, tags */
+.rs-code {
+  font-family: var(--rs-font-mono);
+  font-weight: var(--rs-weight-regular);
+  font-size: 0.92em;
+  letter-spacing: var(--rs-track-mono);
+  color: var(--rs-fg-1);
+  background: var(--rs-surface);
+  border: 1px solid var(--rs-line);
+  padding: 2px 6px;
+  border-radius: var(--rs-radius-xs);
+}
+
+/* Link */
+.rs-link {
+  color: var(--rs-fg-1);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rs-line-strong);
+  transition: border-color var(--rs-dur-2) var(--rs-ease-out),
+              color var(--rs-dur-2) var(--rs-ease-out);
+}
+.rs-link:hover {
+  color: var(--rs-accent-hi);
+  border-bottom-color: var(--rs-accent);
+}

@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css">
+<style>
+.pill { display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:999px; font-family:var(--rs-font-mono); font-size:11px; letter-spacing:0.02em; border:1px solid var(--rs-line); color:var(--rs-fg-2); background:var(--rs-surface); }
+.pill .dot { width:6px; height:6px; border-radius:50%; }
+.pill-live { color:#2BD37B; border-color:rgba(43,211,123,0.3); }
+.pill-warn { color:#FF8A3D; border-color:rgba(255,138,61,0.3); }
+.pill-crit { color:#FF4D4D; border-color:rgba(255,77,77,0.3); }
+.pill-accent { color:#FFCC33; border-color:rgba(255,184,0,0.4); background:rgba(255,184,0,0.1);}
+</style></head>
+<body><div class="card">
+  <div class="eyebrow" style="margin-bottom:14px;">tags + status pills</div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;">
+    <span class="pill">TypeScript</span>
+    <span class="pill">Go</span>
+    <span class="pill">Linux</span>
+    <span class="pill">Web Audio</span>
+    <span class="pill pill-accent">red team</span>
+    <span class="pill pill-live"><span class="dot" style="background:#2BD37B"></span>shipped</span>
+    <span class="pill pill-warn"><span class="dot" style="background:#FF8A3D"></span>WIP</span>
+    <span class="pill pill-crit"><span class="dot" style="background:#FF4D4D"></span>CVE-2024-XXXX</span>
+  </div>
+</div></body></html>
