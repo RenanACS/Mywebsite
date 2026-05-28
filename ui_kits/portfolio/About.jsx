@@ -1,10 +1,17 @@
-/* global React, SectionHeader, Pill */
+/* global React, SectionHeader, Pill, useLang, T */
 
 function About() {
+  const { lang } = useLang();
+  const t = T[lang].about;
+
   return (
     <section id="about" style={{ padding: '120px 32px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-        <SectionHeader index="01" title="ABOUT" kicker={<>A few facts. <span style={{ color: 'rgba(255,255,255,0.45)' }}>About me.</span></>} />
+        <SectionHeader
+          index="01"
+          title={t.title}
+          kicker={<>{t.kicker1} <span style={{ color: 'rgba(255,255,255,0.45)' }}>{t.kicker2}</span></>}
+        />
 
         <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 80, alignItems: 'start' }}>
           {/* bio column */}
@@ -14,37 +21,37 @@ function About() {
               color: 'rgba(255,255,255,0.85)', letterSpacing: '-0.015em', margin: 0,
               textWrap: 'pretty',
             }}>
-              I'm <strong style={{ color: '#fff', fontWeight: 600 }}>Renan</strong>, a software engineer from Brazil. I came up writing application code and got hooked on the layer underneath — kernels, networks, the shape of how things actually run.
+              {t.bio1a}<strong style={{ color: '#fff', fontWeight: 600 }}>Renan</strong>{t.bio1b}
             </p>
             <p style={{
               fontFamily: 'var(--rs-font-sans)', fontSize: 17, lineHeight: 1.6,
               color: 'rgba(255,255,255,0.62)', letterSpacing: '-0.01em', margin: 0,
               textWrap: 'pretty',
             }}>
-              I'm pivoting into <strong style={{ color: '#FFCC33', fontWeight: 500 }}>offensive security</strong> — red team, pentest, the kind of work where you read a system long enough to find the seams. Studying for <span style={{
+              {t.bio2a}<strong style={{ color: '#FFCC33', fontWeight: 500 }}>{t.bio2b}</strong>{t.bio2c}<span style={{
                 fontFamily: 'var(--rs-font-mono)', fontSize: '0.9em', background: '#121215',
                 border: '1px solid rgba(255,255,255,0.1)', padding: '1px 6px', borderRadius: 4,
                 color: 'rgba(255,255,255,0.85)',
-              }}>OSCP</span>, sharpening tooling in CTFs, building things that put me closer to the metal.
+              }}>OSCP</span>{t.bio2d}
             </p>
             <p style={{
               fontFamily: 'var(--rs-font-sans)', fontSize: 17, lineHeight: 1.6,
               color: 'rgba(255,255,255,0.62)', letterSpacing: '-0.01em', margin: 0,
             }}>
-              When I'm not at the keyboard I'm at a kit. Drums have been the longest-running thing in my life — patience, listening, repetition — and they show up in everything else I do.
+              {t.bio3}
             </p>
           </div>
 
           {/* side facts column */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <FactRow k="based" v="Brazil" />
-            <FactRow k="day job" v="Software engineer" />
-            <FactRow k="studying" v="OSCP · web app hacking" />
-            <FactRow k="instrument" v="Drums · 12 years and counting" />
-            <FactRow k="companions" v="2 cats, 1 dog" />
-            <FactRow k="editor" v="Neovim" />
-            <FactRow k="shell" v="zsh + tmux" />
-            <FactRow k="reading" v={<span><em>The Web App Hacker's Handbook</em></span>} />
+            <FactRow k={t.keys.based} v={t.vals.based} />
+            <FactRow k={t.keys.dayJob} v={t.vals.dayJob} />
+            <FactRow k={t.keys.studying} v={t.vals.studying} />
+            <FactRow k={t.keys.instrument} v={t.vals.instrument} />
+            <FactRow k={t.keys.companions} v={t.vals.companions} />
+            <FactRow k={t.keys.editor} v="Neovim" />
+            <FactRow k={t.keys.shell} v="zsh + tmux" />
+            <FactRow k={t.keys.reading} v={<span><em>The Web App Hacker's Handbook</em></span>} />
           </div>
         </div>
       </div>

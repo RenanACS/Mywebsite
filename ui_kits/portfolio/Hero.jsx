@@ -1,6 +1,9 @@
-/* global React, Magnetic, Button, Pill */
+/* global React, Magnetic, Button, Pill, useLang, T */
 
 function Hero() {
+  const { lang } = useLang();
+  const t = T[lang].hero;
+
   return (
     <section id="top" style={{
       minHeight: '100vh', position: 'relative',
@@ -23,7 +26,7 @@ function Hero() {
           <span style={{
             fontFamily: 'var(--rs-font-mono)', fontSize: 11, letterSpacing: '0.06em',
             color: 'rgba(255,255,255,0.85)', textTransform: 'uppercase',
-          }}>Available — heading toward red team</span>
+          }}>{t.status}</span>
         </div>
 
         {/* the big line */}
@@ -34,8 +37,8 @@ function Hero() {
           textWrap: 'balance',
         }}>
           Renan Soares.<br />
-          <span style={{ color: 'rgba(255,255,255,0.45)' }}>I break things</span><br />
-          <span style={{ color: 'rgba(255,255,255,0.45)' }}>on purpose.</span>
+          <span style={{ color: 'rgba(255,255,255,0.45)' }}>{t.line2}</span><br />
+          <span style={{ color: 'rgba(255,255,255,0.45)' }}>{t.line3}</span>
         </h1>
 
         <p style={{
@@ -43,24 +46,24 @@ function Hero() {
           color: 'rgba(255,255,255,0.6)', maxWidth: 560, marginTop: 32,
           letterSpacing: '-0.01em',
         }}>
-          Software engineer by day, drummer by night, learning to break into systems on weekends. I write code, read manpages, and keep a list of <span style={{
+          {t.bio[0]}<span style={{
             fontFamily: 'var(--rs-font-mono)', fontSize: '0.92em', background: '#121215',
             border: '1px solid rgba(255,255,255,0.1)', padding: '1px 6px', borderRadius: 4,
-          }}>CVE</span> tabs open.
+          }}>CVE</span>{t.bio[1]}
         </p>
 
         {/* CTAs */}
         <div style={{ display: 'flex', gap: 14, marginTop: 40, alignItems: 'center' }}>
           <Magnetic strength={0.25} radius={40}>
-            <Button href="#projects">See projects <span style={{ fontFamily: 'var(--rs-font-mono)' }}>→</span></Button>
+            <Button href="#projects">{t.ctaPrimary} <span style={{ fontFamily: 'var(--rs-font-mono)' }}>→</span></Button>
           </Magnetic>
           <Magnetic strength={0.2} radius={40}>
-            <Button variant="secondary" href="mailto:contact@example.com">Say hi</Button>
+            <Button variant="secondary" href="mailto:renanacsoares@gmail.com">{t.ctaSecondary}</Button>
           </Magnetic>
           <span style={{
             fontFamily: 'var(--rs-font-mono)', fontSize: 11, color: 'rgba(255,255,255,0.35)',
             marginLeft: 8, letterSpacing: '0.02em',
-          }}>// hover the buttons — they pull back</span>
+          }}>{t.comment}</span>
         </div>
 
         {/* tiny coordinate readout at bottom-left */}

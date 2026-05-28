@@ -1,6 +1,9 @@
-/* global React, Magnetic, SocialIcon, SOCIAL */
+/* global React, Magnetic, SocialIcon, SOCIAL, useLang, T */
 
 function Contact() {
+  const { lang } = useLang();
+  const t = T[lang].contact;
+
   return (
     <section id="contact" style={{
       padding: '120px 32px 80px',
@@ -10,10 +13,10 @@ function Contact() {
         <div style={{
           fontFamily: 'var(--rs-font-mono)', fontSize: 10, letterSpacing: '0.14em',
           textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 24,
-        }}>04 / CONTACT</div>
+        }}>04 / {t.label}</div>
 
         <Magnetic strength={0.06} radius={300}>
-          <a href={`mailto:contact@example.com`} style={{
+          <a href="mailto:renanacsoares@gmail.com" style={{
             display: 'inline-block', textDecoration: 'none', color: '#fff',
             fontFamily: 'var(--rs-font-sans)', fontWeight: 600,
             fontSize: 'clamp(48px, 8vw, 96px)', lineHeight: 0.96,
@@ -21,7 +24,7 @@ function Contact() {
           }}
           onMouseEnter={(e) => e.currentTarget.style.color = '#FFCC33'}
           onMouseLeave={(e) => e.currentTarget.style.color = '#fff'}>
-            Let's talk. <span style={{ color: 'rgba(255,255,255,0.4)' }}>→</span>
+            {t.cta} <span style={{ color: 'rgba(255,255,255,0.4)' }}>→</span>
           </a>
         </Magnetic>
 
@@ -46,7 +49,7 @@ function Contact() {
           color: 'rgba(255,255,255,0.35)', letterSpacing: '0.02em',
         }}>
           <span>© 2026 Renan Augusto da Costa Soares</span>
-          <span>built · 0 frameworks · 1 cursor</span>
+          <span>{t.footer}</span>
         </div>
       </div>
     </section>

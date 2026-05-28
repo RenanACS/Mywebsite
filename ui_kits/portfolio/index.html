@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -47,6 +47,7 @@
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
   <!-- Components: order matters. Primitives, then composites, then sections, then root. -->
+  <script type="text/babel" src="i18n.jsx"></script>
   <script type="text/babel" src="MagneticHover.jsx"></script>
   <script type="text/babel" src="Cursor.jsx"></script>
   <script type="text/babel" src="components.jsx"></script>
@@ -100,7 +101,7 @@
     }
 
     const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<App />);
+    root.render(<LangProvider><App /></LangProvider>);
   </script>
 </body>
 </html>

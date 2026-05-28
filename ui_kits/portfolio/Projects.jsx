@@ -1,4 +1,4 @@
-/* global React, SectionHeader, Pill, Magnetic */
+/* global React, SectionHeader, Pill, Magnetic, useLang, T */
 
 const { useState: useStateP } = React;
 
@@ -36,57 +36,26 @@ const CatIcon = ({ size = 20 }) => (
   </svg>
 );
 
-const PROJECTS = [
-  {
-    id: 'drummer-sim',
-    index: '01',
-    category: 'music',
-    title: 'Drummer Simulator',
-    Icon: DrumIcon,
-    blurb: 'A playable drum kit in the browser. Web Audio for the sounds, Canvas for the kit, keyboard + MIDI input. Built because nothing online felt like a real kit.',
-    stack: ['TypeScript', 'Web Audio', 'Canvas', 'MIDI'],
-    status: 'wip',
-    statusLabel: 'WIP',
-    href: '#',
-  },
-  {
-    id: 'recon-cli',
-    index: '02',
-    category: 'security',
-    title: 'recon-cli',
-    Icon: LockIcon,
-    blurb: 'A small Go tool that wraps nmap + a few HTTP probes into one report. Built while studying for OSCP. Single binary, no config.',
-    stack: ['Go', 'Cobra', 'nmap'],
-    status: 'live',
-    statusLabel: 'shipped',
-    href: '#',
-  },
-  {
-    id: 'paw-prints',
-    index: '03',
-    category: 'side',
-    title: 'paw-prints',
-    Icon: CatIcon,
-    blurb: 'A tiny site that logs photos of my cats and dog with EXIF metadata, on a static budget. Wrote it in a weekend because I missed them.',
-    stack: ['Astro', 'TypeScript', 'EXIF'],
-    status: 'live',
-    statusLabel: 'shipped',
-    href: '#',
-  },
+const PROJECT_BASE = [
+  { id: 'drummer-sim', index: '01', Icon: DrumIcon, status: 'wip',  href: '#' },
+  { id: 'recon-cli',   index: '02', Icon: LockIcon, status: 'live', href: '#', title: 'recon-cli' },
+  { id: 'paw-prints',  index: '03', Icon: CatIcon,  status: 'live', href: '#', title: 'paw-prints' },
 ];
 
-function ProjectCard({ p }) {
+const PROJECT_TITLES = ['Drummer Simulator', 'recon-cli', 'paw-prints'];
+
+function ProjectCard({ base, item, viewCase }) {
   const [hover, setHover] = useStateP(false);
   const tones = {
     live: { color: '#2BD37B' },
     wip:  { color: '#FF8A3D' },
     crit: { color: '#FF4D4D' },
   };
-  const tone = tones[p.status];
+  const tone = tones[base.status];
 
   return (
     <Magnetic strength={0.12} radius={80} tilt>
-      <a href={p.href}
+      <a href={base.href}
          onMouseEnter={() => setHover(true)}
          onMouseLeave={() => setHover(false)}
          style={{
@@ -97,7 +66,7 @@ function ProjectCard({ p }) {
            borderRadius: 10,
            padding: 28,
            transition: 'border-color .25s cubic-bezier(.22,1,.36,1), box-shadow .25s cubic-bezier(.22,1,.36,1)',
-           display: 'flex', flexDirection: 'column', gap: 22,
+           flexDirection: 'column', gap: 22,
            minHeight: 280, height: '100%',
          }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -106,13 +75,13 @@ function ProjectCard({ p }) {
             textTransform: 'uppercase',
             color: hover ? '#FFCC33' : 'rgba(255,255,255,0.4)',
             transition: 'color .2s ease',
-          }}>{p.index} · {p.category}</span>
+          }}>{base.index} · {item.category}</span>
           <span style={{
             display: 'inline-flex', alignItems: 'center', gap: 6,
             fontFamily: 'var(--rs-font-mono)', fontSize: 11, ...tone,
           }}>
             <span style={{ width: 6, height: 6, borderRadius: 50, background: tone.color }} />
-            {p.statusLabel}
+            {item.statusLabel}
           </span>
         </div>
 
@@ -128,19 +97,19 @@ function ProjectCard({ p }) {
               transform: hover ? 'rotate(-6deg) scale(1.08)' : 'rotate(0deg)',
               transition: 'transform .35s cubic-bezier(.34,1.56,.64,1)',
             }}>
-              <p.Icon size={22} />
+              <base.Icon size={22} />
             </span>
-            {p.title}
+            {PROJECT_TITLES[parseInt(base.index, 10) - 1]}
           </h3>
           <p style={{
             fontFamily: 'var(--rs-font-sans)', fontSize: 14, lineHeight: 1.55,
             color: 'rgba(255,255,255,0.6)', letterSpacing: '-0.005em', margin: '14px 0 0',
             textWrap: 'pretty',
-          }}>{p.blurb}</p>
+          }}>{item.blurb}</p>
         </div>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-          {p.stack.map((t) => (
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 22 }}>
+          {(['TypeScript, Web Audio, Canvas, MIDI', 'Go, Cobra, nmap', 'Astro, TypeScript, EXIF'][parseInt(base.index, 10) - 1]).split(', ').map((t) => (
             <span key={t} style={{
               fontFamily: 'var(--rs-font-mono)', fontSize: 10, letterSpacing: '0.04em',
               color: 'rgba(255,255,255,0.6)',
@@ -150,12 +119,12 @@ function ProjectCard({ p }) {
         </div>
 
         <div style={{
-          display: 'flex', alignItems: 'center', gap: 8,
+          display: 'flex', alignItems: 'center', gap: 8, marginTop: 22,
           fontFamily: 'var(--rs-font-mono)', fontSize: 12,
           color: hover ? '#FFCC33' : 'rgba(255,255,255,0.4)',
           transition: 'color .2s ease',
         }}>
-          <span>view case</span>
+          <span>{viewCase}</span>
           <span style={{
             display: 'inline-block',
             transform: hover ? 'translateX(6px)' : 'translateX(0)',
@@ -168,19 +137,28 @@ function ProjectCard({ p }) {
 }
 
 function Projects() {
+  const { lang } = useLang();
+  const t = T[lang].projects;
+
   return (
     <section id="projects" style={{ padding: '120px 32px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-        <SectionHeader index="02" title="PROJECTS" kicker={<>What I'm building. <span style={{ color: 'rgba(255,255,255,0.45)' }}>From music to malware analysis.</span></>} />
+        <SectionHeader
+          index="02"
+          title={t.title}
+          kicker={<>{t.kicker1} <span style={{ color: 'rgba(255,255,255,0.45)' }}>{t.kicker2}</span></>}
+        />
         <div style={{
           display: 'grid', gap: 20,
           gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
         }}>
-          {PROJECTS.map((p) => <ProjectCard key={p.id} p={p} />)}
+          {PROJECT_BASE.map((base, i) => (
+            <ProjectCard key={base.id} base={base} item={t.items[i]} viewCase={t.viewCase} />
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
-Object.assign(window, { Projects, PROJECTS });
+Object.assign(window, { Projects });

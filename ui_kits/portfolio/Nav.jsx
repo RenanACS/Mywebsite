@@ -1,4 +1,4 @@
-/* global React, Logo, SocialIcon, Magnetic */
+/* global React, Logo, SocialIcon, Magnetic, useLang, T */
 
 const { useEffect: useEffectN, useState: useStateN } = React;
 
@@ -8,8 +8,46 @@ const SOCIAL = {
   instagram: 'https://instagram.com/renanacsoares',
 };
 
+function LangToggle() {
+  const { lang, setLang } = useLang();
+
+  const btn = (code) => (
+    <button
+      key={code}
+      onClick={() => setLang(code)}
+      style={{
+        fontFamily: 'var(--rs-font-mono)',
+        fontSize: 11,
+        letterSpacing: '0.08em',
+        textTransform: 'uppercase',
+        color: lang === code ? '#fff' : 'rgba(255,255,255,0.35)',
+        background: 'none',
+        border: 'none',
+        cursor: 'pointer',
+        padding: '2px 0',
+        transition: 'color .2s ease',
+      }}
+      onMouseEnter={(e) => { if (lang !== code) e.currentTarget.style.color = 'rgba(255,255,255,0.7)'; }}
+      onMouseLeave={(e) => { if (lang !== code) e.currentTarget.style.color = 'rgba(255,255,255,0.35)'; }}
+    >
+      {code}
+    </button>
+  );
+
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+      {btn('pt')}
+      <span style={{ fontFamily: 'var(--rs-font-mono)', fontSize: 10, color: 'rgba(255,255,255,0.2)' }}>·</span>
+      {btn('en')}
+    </div>
+  );
+}
+
 function Nav({ active = 'about' }) {
   const [scrolled, setScrolled] = useStateN(false);
+  const { lang } = useLang();
+  const t = T[lang].nav;
+
   useEffectN(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
@@ -48,14 +86,18 @@ function Nav({ active = 'about' }) {
           }}>renan.soares</span>
         </a>
         <nav style={{ display: 'flex', gap: 28, marginLeft: 32 }}>
-          {link('about', 'about')}
-          {link('projects', 'projects')}
-          {link('skills', 'skills')}
+          {link('about', t.about)}
+          {link('projects', t.projects)}
+          {link('skills', t.skills)}
         </nav>
-        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10 }}>
-          <Magnetic strength={0.4}><SocialIcon kind="github" href={SOCIAL.github} /></Magnetic>
-          <Magnetic strength={0.4}><SocialIcon kind="linkedin" href={SOCIAL.linkedin} /></Magnetic>
-          <Magnetic strength={0.4}><SocialIcon kind="instagram" href={SOCIAL.instagram} /></Magnetic>
+        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 16 }}>
+          <LangToggle />
+          <div style={{ width: 1, height: 16, background: 'rgba(255,255,255,0.12)' }} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <Magnetic strength={0.4}><SocialIcon kind="github" href={SOCIAL.github} /></Magnetic>
+            <Magnetic strength={0.4}><SocialIcon kind="linkedin" href={SOCIAL.linkedin} /></Magnetic>
+            <Magnetic strength={0.4}><SocialIcon kind="instagram" href={SOCIAL.instagram} /></Magnetic>
+          </div>
         </div>
       </div>
     </header>
