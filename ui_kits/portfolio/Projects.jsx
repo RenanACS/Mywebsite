@@ -21,28 +21,12 @@ const LockIcon = ({ size = 20 }) => (
     <path d="M8 11.2v1.5"/>
   </svg>
 );
-const CatIcon = ({ size = 20 }) => (
-  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M3 3.2 L3.6 7.3 L5.8 5.6 Z"/>
-    <path d="M13 3.2 L12.4 7.3 L10.2 5.6 Z"/>
-    <path d="M3.6 7.3 C 3 9.8, 4.4 12.3, 6.6 12.8 C 7.6 13, 8.4 13, 9.4 12.8 C 11.6 12.3, 13 9.8, 12.4 7.3"/>
-    <circle cx="6.4" cy="9" r="0.55" fill="currentColor" stroke="none"/>
-    <circle cx="9.6" cy="9" r="0.55" fill="currentColor" stroke="none"/>
-    <path d="M7.4 10.6 L8 11.2 L8.6 10.6"/>
-    <path d="M5.4 10.4 L3.2 10"/>
-    <path d="M5.4 10.9 L3.4 11.2"/>
-    <path d="M10.6 10.4 L12.8 10"/>
-    <path d="M10.6 10.9 L12.6 11.2"/>
-  </svg>
-);
-
 const PROJECT_BASE = [
-  { id: 'drummer-sim', index: '01', Icon: DrumIcon, status: 'wip',  href: '#' },
+  { id: 'drummer-sim', index: '01', Icon: DrumIcon, status: 'live', href: 'drumio.html' },
   { id: 'recon-cli',   index: '02', Icon: LockIcon, status: 'live', href: '#', title: 'recon-cli' },
-  { id: 'paw-prints',  index: '03', Icon: CatIcon,  status: 'live', href: '#', title: 'paw-prints' },
 ];
 
-const PROJECT_TITLES = ['Drummer Simulator', 'recon-cli', 'paw-prints'];
+const PROJECT_TITLES = ['Drummer Simulator', 'recon-cli'];
 
 function ProjectCard({ base, item, viewCase }) {
   const [hover, setHover] = useStateP(false);
@@ -109,7 +93,7 @@ function ProjectCard({ base, item, viewCase }) {
         </div>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 22 }}>
-          {(['TypeScript, Web Audio, Canvas, MIDI', 'Go, Cobra, nmap', 'Astro, TypeScript, EXIF'][parseInt(base.index, 10) - 1]).split(', ').map((t) => (
+          {(['TypeScript, Web Audio, Canvas, MIDI', 'Go, Cobra, nmap'][parseInt(base.index, 10) - 1]).split(', ').map((t) => (
             <span key={t} style={{
               fontFamily: 'var(--rs-font-mono)', fontSize: 10, letterSpacing: '0.04em',
               color: 'rgba(255,255,255,0.6)',

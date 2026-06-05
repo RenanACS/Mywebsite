@@ -15,7 +15,7 @@ const T = {
       line2: 'I break things',
       line3: 'on purpose.',
       bio: [
-        'Software engineer by day, drummer by night, learning to break into systems on weekends. I write code, read manpages, and keep a list of ',
+        'Red teamer and bug hunter by day, drummer by night, learning to break into systems on weekends. I write code, read manpages, and keep a list of ',
         ' tabs open.',
       ],
       ctaPrimary: 'See projects',
@@ -27,7 +27,7 @@ const T = {
       kicker1: 'A few facts.',
       kicker2: 'About me.',
       bio1a: "I'm ",
-      bio1b: ', a software engineer from Brazil. I came up writing application code and got hooked on the layer underneath — kernels, networks, the shape of how things actually run.',
+      bio1b: ', a Red teamer and bug hunter from Brazil. I came up writing application code and got hooked on the layer underneath — kernels, networks, the shape of how things actually run.',
       bio2a: "I'm pivoting into ",
       bio2b: 'offensive security',
       bio2c: ' — red team, pentest, the kind of work where you read a system long enough to find the seams. Studying for ',
@@ -45,8 +45,8 @@ const T = {
       },
       vals: {
         based: 'Brazil',
-        dayJob: 'Software engineer',
-        studying: 'OSCP · web app hacking',
+        dayJob: 'Red teamer & bug hunter',
+        studying: 'Ethical Hacking - CISCO',
         instrument: 'Drums · 12 years and counting',
         companions: '2 cats, 1 dog',
       },
@@ -77,12 +77,10 @@ const T = {
     skills: {
       title: 'SKILLS',
       kicker1: 'The stack.',
-      kicker2: 'Three lists: shipping, studying, familiar.',
-      note: '// the list grows. ping me about anything not here.',
+      kicker2: 'Two lists: shipping, studying.',
       groups: [
         { eyebrow: 'shipping', headline: 'What I reach for first.' },
         { eyebrow: 'studying', headline: "Where I'm headed." },
-        { eyebrow: 'familiar', headline: 'Shipped with, would do again.' },
       ],
     },
     contact: {
@@ -103,7 +101,7 @@ const T = {
       line2: 'Eu quebro coisas',
       line3: 'de propósito.',
       bio: [
-        'Engenheiro de software de dia, baterista à noite, aprendendo a invadir sistemas nos fins de semana. Escrevo código, leio manpages e mantenho uma lista de abas de ',
+        'Red teamer e bughunter de dia, baterista à noite, aprendendo a invadir sistemas nos fins de semana. Escrevo código, leio manpages e mantenho uma lista de abas de ',
         ' abertas.',
       ],
       ctaPrimary: 'Ver projetos',
@@ -115,7 +113,7 @@ const T = {
       kicker1: 'Alguns fatos.',
       kicker2: 'Sobre mim.',
       bio1a: 'Sou ',
-      bio1b: ', engenheiro de software do Brasil. Comecei escrevendo código de aplicação e fui fisgado pela camada de baixo — kernels, redes, a forma como as coisas realmente funcionam.',
+      bio1b: ', um Red teamer e bughunter do Brasil. Comecei escrevendo código de aplicação e fui fisgado pela camada de baixo — kernels, redes, a forma como as coisas realmente funcionam.',
       bio2a: 'Estou migrando para ',
       bio2b: 'segurança ofensiva',
       bio2c: ' — red team, pentest, o tipo de trabalho onde você lê um sistema por tempo suficiente para encontrar as brechas. Estudando para ',
@@ -133,8 +131,8 @@ const T = {
       },
       vals: {
         based: 'Brasil',
-        dayJob: 'Engenheiro de software',
-        studying: 'OSCP · hacking de apps web',
+        dayJob: 'Red teamer e bughunter',
+        studying: 'Ethical Hacking - CISCO',
         instrument: 'Bateria · 12 anos e contando',
         companions: '2 gatos, 1 cachorro',
       },
@@ -165,12 +163,10 @@ const T = {
     skills: {
       title: 'HABILIDADES',
       kicker1: 'O stack.',
-      kicker2: 'Três listas: usando, estudando, familiar.',
-      note: '// a lista cresce. me manda mensagem sobre qualquer coisa que não está aqui.',
+      kicker2: 'Duas listas: usando, estudando.',
       groups: [
         { eyebrow: 'usando', headline: 'O que uso primeiro.' },
         { eyebrow: 'estudando', headline: 'Por onde estou indo.' },
-        { eyebrow: 'familiar', headline: 'Já usei, usaria de novo.' },
       ],
     },
     contact: {

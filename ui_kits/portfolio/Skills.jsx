@@ -2,35 +2,25 @@
 
 const SKILL_ITEMS = [
   [
-    { name: 'TypeScript', tone: 'live' },
-    { name: 'Go', tone: 'live' },
-    { name: 'Node.js', tone: 'live' },
-    { name: 'React', tone: 'live' },
-    { name: 'PostgreSQL', tone: 'live' },
-    { name: 'Linux', tone: 'live' },
-    { name: 'Git', tone: 'live' },
-    { name: 'Docker', tone: 'live' },
+    { name: 'TypeScript', tone: 'live', icon: 'https://cdn.simpleicons.org/typescript/fff' },
+    { name: 'Go', tone: 'live', icon: 'https://cdn.simpleicons.org/go/fff' },
+    { name: 'Node.js', tone: 'live', icon: 'https://cdn.simpleicons.org/nodedotjs/fff' },
+    { name: 'React', tone: 'live', icon: 'https://cdn.simpleicons.org/react/fff' },
+    { name: 'PostgreSQL', tone: 'live', icon: 'https://cdn.simpleicons.org/postgresql/fff' },
+    { name: 'Linux', tone: 'live', icon: 'https://cdn.simpleicons.org/linux/fff' },
+    { name: 'Git', tone: 'live', icon: 'https://cdn.simpleicons.org/git/fff' },
+    { name: 'Docker', tone: 'live', icon: 'https://cdn.simpleicons.org/docker/fff' },
   ],
   [
-    { name: 'OSCP', tone: 'accent' },
-    { name: 'Burp Suite', tone: 'accent' },
+    { name: 'OSCP', tone: 'accent', icon: 'https://cdn.simpleicons.org/kalilinux/fff' },
+    { name: 'Burp Suite', tone: 'accent', icon: 'https://cdn.simpleicons.org/burpsuite/fff' },
     { name: 'nmap', tone: 'accent' },
-    { name: 'Metasploit', tone: 'accent' },
-    { name: 'Wireshark', tone: 'accent' },
-    { name: 'Bash scripting', tone: 'accent' },
-    { name: 'Python', tone: 'accent' },
+    { name: 'Metasploit', tone: 'accent', icon: 'https://cdn.simpleicons.org/metasploit/fff' },
+    { name: 'Wireshark', tone: 'accent', icon: 'https://cdn.simpleicons.org/wireshark/fff' },
+    { name: 'Bash scripting', tone: 'accent', icon: 'https://cdn.simpleicons.org/gnubash/fff' },
+    { name: 'Python', tone: 'accent', icon: 'https://cdn.simpleicons.org/python/fff' },
     { name: 'Active Directory', tone: 'accent' },
     { name: 'web app sec', tone: 'accent' },
-  ],
-  [
-    { name: 'Rust', tone: 'default' },
-    { name: 'Next.js', tone: 'default' },
-    { name: 'AWS', tone: 'default' },
-    { name: 'Redis', tone: 'default' },
-    { name: 'GraphQL', tone: 'default' },
-    { name: 'Tailwind', tone: 'default' },
-    { name: 'Vim', tone: 'default' },
-    { name: 'tmux', tone: 'default' },
   ],
 ];
 
@@ -70,17 +60,15 @@ function Skills() {
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
                 {SKILL_ITEMS[i].map((item) => (
-                  <Pill key={item.name} tone={item.tone}>{item.name}</Pill>
+                  <Pill key={item.name} tone={item.tone}>
+                    {item.icon ? <img src={item.icon} alt={item.name} title={item.name} style={{ width: 16, height: 16, display: 'block' }} /> : item.name}
+                  </Pill>
                 ))}
               </div>
             </div>
           ))}
         </div>
 
-        <p style={{
-          fontFamily: 'var(--rs-font-mono)', fontSize: 12, color: 'rgba(255,255,255,0.4)',
-          marginTop: 32, letterSpacing: '0.02em',
-        }}>{t.note}</p>
       </div>
     </section>
   );

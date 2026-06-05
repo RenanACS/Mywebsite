@@ -1,16 +1,12 @@
 /* global React */
-// Custom cursor: a 1px ring + a soft 600px radial glow that drifts behind it.
-// The native cursor is hidden by body CSS; we restore it over text inputs in index.html.
+// Custom cursor: canvas particle system that repels from the mouse
 
 const { useEffect, useRef: useRefC } = React;
 
 function Cursor() {
-  const ringRef = useRefC(null);
-  const glowRef = useRefC(null);
+  const canvasRef = useRefC(null);
   const stateRef = useRefC({
     tx: 0, ty: 0,   // target (pointer)
-    rx: 0, ry: 0,   // ring (snappy)
-    gx: 0, gy: 0,   // glow (lazy)
     visible: false,
   });
 
@@ -18,72 +14,120 @@ function Cursor() {
     if (window.matchMedia('(pointer: coarse)').matches) return;
     if (window.innerWidth < 1024) return;
 
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+    
+    const numParticles = 120;
+    const repulsionRadius = 180;
+
+    const resize = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    };
+    
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.8;
+        this.vy = (Math.random() - 0.5) * 0.8;
+        this.size = Math.random() * 2 + 0.5;
+        this.color = 'rgba(255, 184, 0, ' + (Math.random() * 0.4 + 0.1) + ')';
+      }
+
+      update(mouseX, mouseY) {
+        // Drift
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Wrap around
+        if (this.x < 0) this.x = width;
+        if (this.x > width) this.x = 0;
+        if (this.y < 0) this.y = height;
+        if (this.y > height) this.y = 0;
+
+        // Repulsion (Antigravity field)
+        if (stateRef.current.visible) {
+          const dx = this.x - mouseX;
+          const dy = this.y - mouseY;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          
+          if (dist < repulsionRadius) {
+            const force = (repulsionRadius - dist) / repulsionRadius;
+            // Push away
+            this.x += (dx / dist) * force * 10;
+            this.y += (dy / dist) * force * 10;
+          }
+        }
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < numParticles; i++) {
+      particles.push(new Particle());
+    }
+
     const onMove = (e) => {
       stateRef.current.tx = e.clientX;
       stateRef.current.ty = e.clientY;
       if (!stateRef.current.visible) {
-        stateRef.current.rx = e.clientX;
-        stateRef.current.ry = e.clientY;
-        stateRef.current.gx = e.clientX;
-        stateRef.current.gy = e.clientY;
         stateRef.current.visible = true;
-        if (ringRef.current) ringRef.current.style.opacity = '1';
-        if (glowRef.current) glowRef.current.style.opacity = '1';
+        canvas.style.opacity = '1';
       }
     };
+    
     const onLeave = () => {
       stateRef.current.visible = false;
-      if (ringRef.current) ringRef.current.style.opacity = '0';
-      if (glowRef.current) glowRef.current.style.opacity = '0';
+      canvas.style.opacity = '0';
     };
 
     let raf;
     const tick = () => {
+      ctx.clearRect(0, 0, width, height);
+      
       const s = stateRef.current;
-      // ring snappy
-      s.rx += (s.tx - s.rx) * 0.32;
-      s.ry += (s.ty - s.ry) * 0.32;
-      // glow lazy
-      s.gx += (s.tx - s.gx) * 0.08;
-      s.gy += (s.ty - s.gy) * 0.08;
-      if (ringRef.current) {
-        ringRef.current.style.transform = `translate3d(${s.rx - 6}px, ${s.ry - 6}px, 0)`;
-      }
-      if (glowRef.current) {
-        glowRef.current.style.transform = `translate3d(${s.gx - 300}px, ${s.gy - 300}px, 0)`;
-      }
+
+      particles.forEach(p => {
+        p.update(s.tx, s.ty); // pass exact mouse position instead of snappy ring position
+        p.draw();
+      });
+
       raf = requestAnimationFrame(tick);
     };
+    
     raf = requestAnimationFrame(tick);
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseleave', onLeave);
+    
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener('mousemove', onMove);
       window.removeEventListener('mouseleave', onLeave);
+      window.removeEventListener('resize', resize);
     };
   }, []);
 
   return (
-    <>
-      <div
-        ref={glowRef}
-        style={{
-          position: 'fixed', left: 0, top: 0, width: 600, height: 600, pointerEvents: 'none',
-          background: 'radial-gradient(circle, rgba(255,184,0,0.12) 0%, rgba(255,184,0,0) 55%)',
-          opacity: 0, transition: 'opacity .4s ease', zIndex: 1, mixBlendMode: 'screen',
-        }}
-      />
-      <div
-        ref={ringRef}
-        style={{
-          position: 'fixed', left: 0, top: 0, width: 12, height: 12, pointerEvents: 'none',
-          border: '1px solid #FFB800', borderRadius: '50%',
-          background: 'rgba(255,184,0,0.2)',
-          opacity: 0, transition: 'opacity .2s ease', zIndex: 9999,
-        }}
-      />
-    </>
+    <canvas
+      ref={canvasRef}
+      style={{
+        position: 'fixed', left: 0, top: 0, pointerEvents: 'none',
+        zIndex: 0, opacity: 0, transition: 'opacity .4s ease',
+      }}
+    />
   );
 }
 

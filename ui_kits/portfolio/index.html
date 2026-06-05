@@ -11,8 +11,7 @@
   <style>
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; background: #000; color: #fff;
-      font-family: var(--rs-font-sans); -webkit-font-smoothing: antialiased;
-      cursor: none; /* hide system cursor; restored on inputs */ }
+      font-family: var(--rs-font-sans); -webkit-font-smoothing: antialiased; }
     @media (pointer: coarse), (max-width: 1023px) { html, body { cursor: auto; } }
     input, textarea, select { cursor: auto; }
 
@@ -47,16 +46,16 @@
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
   <!-- Components: order matters. Primitives, then composites, then sections, then root. -->
-  <script type="text/babel" src="i18n.jsx"></script>
-  <script type="text/babel" src="MagneticHover.jsx"></script>
-  <script type="text/babel" src="Cursor.jsx"></script>
-  <script type="text/babel" src="components.jsx"></script>
-  <script type="text/babel" src="Nav.jsx"></script>
-  <script type="text/babel" src="Hero.jsx"></script>
-  <script type="text/babel" src="About.jsx"></script>
-  <script type="text/babel" src="Projects.jsx"></script>
-  <script type="text/babel" src="Skills.jsx"></script>
-  <script type="text/babel" src="Contact.jsx"></script>
+  <script type="text/babel" src="i18n.jsx?v=2"></script>
+  <script type="text/babel" src="MagneticHover.jsx?v=2"></script>
+  <script type="text/babel" src="Cursor.jsx?v=2"></script>
+  <script type="text/babel" src="components.jsx?v=2"></script>
+  <script type="text/babel" src="Nav.jsx?v=2"></script>
+  <script type="text/babel" src="Hero.jsx?v=2"></script>
+  <script type="text/babel" src="About.jsx?v=2"></script>
+  <script type="text/babel" src="Projects.jsx?v=2"></script>
+  <script type="text/babel" src="Skills.jsx?v=2"></script>
+  <script type="text/babel" src="Contact.jsx?v=2"></script>
 
   <script type="text/babel">
     const { useEffect, useState } = React;

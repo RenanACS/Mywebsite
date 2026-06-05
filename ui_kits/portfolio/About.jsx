@@ -44,14 +44,6 @@ function About() {
 
           {/* side facts column */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <FactRow k={t.keys.based} v={t.vals.based} />
-            <FactRow k={t.keys.dayJob} v={t.vals.dayJob} />
-            <FactRow k={t.keys.studying} v={t.vals.studying} />
-            <FactRow k={t.keys.instrument} v={t.vals.instrument} />
-            <FactRow k={t.keys.companions} v={t.vals.companions} />
-            <FactRow k={t.keys.editor} v="Neovim" />
-            <FactRow k={t.keys.shell} v="zsh + tmux" />
-            <FactRow k={t.keys.reading} v={<span><em>The Web App Hacker's Handbook</em></span>} />
           </div>
         </div>
       </div>
