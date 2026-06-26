@@ -64,11 +64,6 @@ const T = {
         },
         {
           category: 'security',
-          statusLabel: 'shipped',
-          blurb: 'A small Go tool that wraps nmap + a few HTTP probes into one report. Built while studying for OSCP. Single binary, no config.',
-        },
-        {
-          category: 'security',
           statusLabel: 'live',
           blurb: 'A broken-access-control training lab. Node/Express app with 15 challenges — IDOR, BFLA, and logic bugs — across three pluggable domains. Built to look and feel like a real product, not a flag grid.',
         },
@@ -147,11 +142,6 @@ const T = {
           category: 'música',
           statusLabel: 'WIP',
           blurb: 'Uma bateria tocável no navegador. Web Audio para os sons, Canvas para o kit, entrada por teclado + MIDI. Construído porque nada online parecia um kit de verdade.',
-        },
-        {
-          category: 'segurança',
-          statusLabel: 'publicado',
-          blurb: 'Uma ferramenta Go que combina nmap + algumas sondagens HTTP em um relatório. Construída enquanto estudava para o OSCP. Binário único, sem config.',
         },
         {
           category: 'segurança',

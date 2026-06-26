@@ -13,14 +13,7 @@ const DrumIcon = ({ size = 20 }) => (
     <path d="M9.8 9.2l.7 3.3"/>
   </svg>
 );
-const LockIcon = ({ size = 20 }) => (
-  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="7" width="10" height="7" rx="1.5"/>
-    <path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/>
-    <circle cx="8" cy="10.5" r="0.7" fill="currentColor" stroke="none"/>
-    <path d="M8 11.2v1.5"/>
-  </svg>
-);
+
 const TargetIcon = ({ size = 20 }) => (
   <svg width={size} height={size} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="8" cy="8" r="6"/>
@@ -30,11 +23,10 @@ const TargetIcon = ({ size = 20 }) => (
 );
 const PROJECT_BASE = [
   { id: 'drummer-sim',  index: '01', Icon: DrumIcon,   status: 'live', href: 'drumio.html' },
-  { id: 'recon-cli',    index: '02', Icon: LockIcon,   status: 'live', href: '#' },
-  { id: 'meridian-lab', index: '03', Icon: TargetIcon, status: 'live', href: 'https://github.com/RenanACS/meridian-bac-lab' },
+  { id: 'meridian-lab', index: '02', Icon: TargetIcon, status: 'live', href: 'https://github.com/RenanACS/meridian-bac-lab' },
 ];
 
-const PROJECT_TITLES = ['Drummer Simulator', 'recon-cli', 'Meridian Lab'];
+const PROJECT_TITLES = ['Drummer Simulator', 'Meridian Lab'];
 
 function ProjectCard({ base, item, viewCase }) {
   const [hover, setHover] = useStateP(false);
@@ -103,7 +95,7 @@ function ProjectCard({ base, item, viewCase }) {
         </div>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 22 }}>
-          {(['TypeScript, Web Audio, Canvas, MIDI', 'Go, Cobra, nmap', 'Node.js, Express, JavaScript'][parseInt(base.index, 10) - 1]).split(', ').map((t) => (
+          {(['TypeScript, Web Audio, Canvas, MIDI', 'Node.js, Express, JavaScript'][parseInt(base.index, 10) - 1]).split(', ').map((t) => (
             <span key={t} style={{
               fontFamily: 'var(--rs-font-mono)', fontSize: 10, letterSpacing: '0.04em',
               color: 'rgba(255,255,255,0.6)',
