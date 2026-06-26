@@ -21,12 +21,20 @@ const LockIcon = ({ size = 20 }) => (
     <path d="M8 11.2v1.5"/>
   </svg>
 );
+const TargetIcon = ({ size = 20 }) => (
+  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="8" cy="8" r="6"/>
+    <circle cx="8" cy="8" r="2.5"/>
+    <path d="M8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2"/>
+  </svg>
+);
 const PROJECT_BASE = [
-  { id: 'drummer-sim', index: '01', Icon: DrumIcon, status: 'live', href: 'drumio.html' },
-  { id: 'recon-cli',   index: '02', Icon: LockIcon, status: 'live', href: '#', title: 'recon-cli' },
+  { id: 'drummer-sim',  index: '01', Icon: DrumIcon,   status: 'live', href: 'drumio.html' },
+  { id: 'recon-cli',    index: '02', Icon: LockIcon,   status: 'live', href: '#' },
+  { id: 'meridian-lab', index: '03', Icon: TargetIcon, status: 'live', href: 'https://github.com/RenanACS/meridian-bac-lab' },
 ];
 
-const PROJECT_TITLES = ['Drummer Simulator', 'recon-cli'];
+const PROJECT_TITLES = ['Drummer Simulator', 'recon-cli', 'Meridian Lab'];
 
 function ProjectCard({ base, item, viewCase }) {
   const [hover, setHover] = useStateP(false);
@@ -40,6 +48,8 @@ function ProjectCard({ base, item, viewCase }) {
   return (
     <Magnetic strength={0.12} radius={80} tilt>
       <a href={base.href}
+         target={base.href.startsWith('http') ? '_blank' : undefined}
+         rel={base.href.startsWith('http') ? 'noopener noreferrer' : undefined}
          onMouseEnter={() => setHover(true)}
          onMouseLeave={() => setHover(false)}
          style={{
@@ -93,7 +103,7 @@ function ProjectCard({ base, item, viewCase }) {
         </div>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 22 }}>
-          {(['TypeScript, Web Audio, Canvas, MIDI', 'Go, Cobra, nmap'][parseInt(base.index, 10) - 1]).split(', ').map((t) => (
+          {(['TypeScript, Web Audio, Canvas, MIDI', 'Go, Cobra, nmap', 'Node.js, Express, JavaScript'][parseInt(base.index, 10) - 1]).split(', ').map((t) => (
             <span key={t} style={{
               fontFamily: 'var(--rs-font-mono)', fontSize: 10, letterSpacing: '0.04em',
               color: 'rgba(255,255,255,0.6)',
